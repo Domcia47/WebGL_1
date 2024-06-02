@@ -27,11 +27,11 @@ void main() {
 const Square = function () {
     const canvas = document.getElementById('main-canvas');
     const gl = canvas.getContext('webgl');
-    let canvasColor = [0.68, 0.85, 0.90]; // Blado niebieski kolor
+    let canvasColor = [0.68, 0.85, 0.90];
 
     checkGl(gl);
 
-    gl.clearColor(...canvasColor, 1.0);  // R,G,B, A 
+    gl.clearColor(...canvasColor, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     const vertexShader = gl.createShader(gl.VERTEX_SHADER);
@@ -59,14 +59,13 @@ const Square = function () {
     gl.validateProgram(program);
 
     let squareVerts = [
-    //  X,    Y,      R,   G,   B
-        -0.5,  0.5,   1.0, 0.0, 1.0,  // Red
-        -0.5, -0.5,   0.0, 0.0, 1.0,  // Red
-         0.5, -0.5,   1.0, 0.0, 0.0,  // Red
+        -0.5,  0.5,   1.0, 0.0, 1.0,
+        -0.5, -0.5,   0.0, 0.0, 1.0, 
+         0.5, -0.5,   1.0, 0.0, 0.0,
 
-        -0.5,  0.5,   1.0, 0.0, 1.0,  // Red
-         0.5, -0.5,   1.0, 0.0, 0.0,  // Red
-         0.5,  0.5,   1.0, 1.0, 0.0   // Red
+        -0.5,  0.5,   1.0, 0.0, 1.0,
+         0.5, -0.5,   1.0, 0.0, 0.0,
+         0.5,  0.5,   1.0, 1.0, 0.0 
     ];
 
     const squareVertBuffer = gl.createBuffer();
@@ -96,8 +95,6 @@ const Square = function () {
     );
 
     gl.enableVertexAttribArray(colorAttrLoc);
-
-    // render time
 
     gl.useProgram(program);
     gl.drawArrays(gl.TRIANGLES, 0, 6);
