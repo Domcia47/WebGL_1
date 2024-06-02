@@ -20,16 +20,16 @@ void main() {
 }
 `;
 
-let triangleColor = [1.0, 0.0, 0.0]; // Początkowy kolor: czerwony
+let triangleColor = [1.0, 0.0, 0.0];
 
 function Triangle() {
     const canvas = document.getElementById('main-canvas');
     const gl = canvas.getContext('webgl');
-    let canvasColor = [0.68, 0.85, 0.90]; // Jasnoniebieski kolor
+    let canvasColor = [0.68, 0.85, 0.90];
 
     checkGl(gl);
 
-    gl.clearColor(...canvasColor, 1.0);  // R,G,B, A 
+    gl.clearColor(...canvasColor, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     const vertexShader = gl.createShader(gl.VERTEX_SHADER);
@@ -56,7 +56,6 @@ function Triangle() {
 
     gl.validateProgram(program);
 
-    // Wierzchołki trójkąta
     let triangleVerts = [
         0.0, 0.5,
         -0.5, -0.5,
@@ -81,12 +80,10 @@ function Triangle() {
 
     const colorUniformLoc = gl.getUniformLocation(program, 'uTriangleColor');
 
-    // Czas renderowania
     gl.useProgram(program);
     gl.uniform3fv(colorUniformLoc, triangleColor);
     gl.drawArrays(gl.TRIANGLES, 0, 3);
 
-    // Nasłuchiwanie przycisku zmiany koloru trójkąta
     document.getElementById('color-button').addEventListener('click', () => {
         triangleColorChange(gl, colorUniformLoc, program);
     });
