@@ -27,11 +27,11 @@ void main() {
 const Hex = function () {
     const canvas = document.getElementById('main-canvas');
     const gl = canvas.getContext('webgl');
-    let canvasColor = [0.68, 0.85, 0.90]; // Blado niebieski kolor
+    let canvasColor = [0.68, 0.85, 0.90];
 
     checkGl(gl);
 
-    gl.clearColor(...canvasColor, 1.0);  // R,G,B, A 
+    gl.clearColor(...canvasColor, 1.0);
     gl.clear(gl.COLOR_BUFFER_BIT);
 
     const vertexShader = gl.createShader(gl.VERTEX_SHADER);
@@ -57,18 +57,15 @@ const Hex = function () {
     gl.detachShader(program, fragmentShader);
 
     gl.validateProgram(program);
-
-    // Nowe wierzchołki dla sześciokąta (środek + sześć wierzchołków wokół)
     let hexagonVerts = [
-        //  X,      Y,     R,    G,    B
-        0.0,     0.0,    1.0,  0.0,  0.0,  // Środek, czerwony
-        0.7,     0.0,    0.0,  1.0,  0.0,  // Pierwszy wierzchołek, zielony
-        0.35,    0.61,   0.0,  0.0,  1.0,  // Drugi wierzchołek, niebieski
-        -0.35,   0.61,   1.0,  1.0,  0.0,  // Trzeci wierzchołek, żółty
-        -0.7,    0.0,    1.0,  0.0,  1.0,  // Czwarty wierzchołek, fioletowy
-        -0.35,  -0.61,   0.0,  1.0,  1.0,  // Piąty wierzchołek, cyjan
-        0.35,   -0.61,   1.0,  1.0,  1.0,  // Szósty wierzchołek, biały
-        0.7,     0.0,    0.0,  1.0,  0.0   // Zamykający wierzchołek, zielony
+        0.0,     0.0,    1.0,  0.0,  0.0, 
+        0.7,     0.0,    0.0,  1.0,  0.0, 
+        0.35,    0.61,   0.0,  0.0,  1.0, 
+        -0.35,   0.61,   1.0,  1.0,  0.0, 
+        -0.7,    0.0,    1.0,  0.0,  1.0, 
+        -0.35,  -0.61,   0.0,  1.0,  1.0, 
+        0.35,   -0.61,   1.0,  1.0,  1.0,  
+        0.7,     0.0,    0.0,  1.0,  0.0   
     ];
 
     const hexagonVertBuffer = gl.createBuffer();
@@ -99,8 +96,6 @@ const Hex = function () {
 
     gl.enableVertexAttribArray(colorAttrLoc);
 
-    // render time
-
     gl.useProgram(program);
     gl.drawArrays(gl.TRIANGLE_FAN, 0, 8);
 };
@@ -123,5 +118,4 @@ function checkLink(gl, program) {
     }
 }
 
-// Inicjalizacja renderowania po załadowaniu strony
 window.onload = Hex;
